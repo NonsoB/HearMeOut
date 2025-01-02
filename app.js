@@ -1,13 +1,3 @@
-// Check if the browser supports the Web Speech API
-if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
-  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-  const recognition = new SpeechRecognition();
-
-  // Configure the recognition instance
-  recognition.lang = 'en-US'; // Language
-  recognition.interimResults = false; // Only final results
-  recognition.continuous = false; // Stops after a single recognition
-
 document.addEventListener('DOMContentLoaded', () => {
   const listenBtn = document.getElementById('listenBtn');
   const speakBtn = document.getElementById('speakBtn');
@@ -18,6 +8,16 @@ document.addEventListener('DOMContentLoaded', () => {
   listenBtn.addEventListener('click', () => {
     output.value += "Listening... (This will be transcription data)\n";
   });
+
+ // Check if the browser supports the Web Speech API
+if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+  const recognition = new SpeechRecognition();
+
+  // Configure the recognition instance
+  recognition.lang = 'en-US'; // Language
+  recognition.interimResults = false; // Only final results
+  recognition.continuous = false; // Stops after a single recognition
 
  // Handle the recognition results
   recognition.onresult = (event) => {
