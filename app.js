@@ -4,6 +4,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const saveBtn = document.getElementById('saveBtn');
   const output = document.getElementById('output');
   const feedbackForm = document.getElementById('feedbackForm');
+  const menuIcon = document.getElementById('menu-icon');
+  const sideMenu = document.getElementById('side-menu');
 
   // Check if the browser supports the Web Speech API
   if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
@@ -71,5 +73,16 @@ document.addEventListener('DOMContentLoaded', () => {
       feedbackForm.reset();
     });
   }
+});
+
+  // Toggle side menu visibility
+  menuIcon.addEventListener('click', () => {
+    sideMenu.classList.toggle('hidden'); // Toggle the hidden class
+    if (sideMenu.classList.contains('hidden')) {
+      sideMenu.style.left = '-250px'; // Slide menu off-screen
+    } else {
+      sideMenu.style.left = '0'; // Slide menu in
+    }
+  });
 });
 
