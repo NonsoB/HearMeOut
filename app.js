@@ -3,48 +3,55 @@ document.addEventListener('DOMContentLoaded', () => {
   const speakBtn = document.getElementById('speakBtn');
   const saveBtn = document.getElementById('saveBtn');
   const output = document.getElementById('output');
+  const feedbackForm = document.getElementById('feedbackForm');
 
-  // Simulate Listen Functionality
-  listenBtn.addEventListener('click', () => {
-    output.value += "Listening... (This will be transcription data)\n";
-  });
+  // Check if the browser supports the Web Speech API
+  if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    const recognition = new SpeechRecognition();
 
- // Check if the browser supports the Web Speech API
-if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
-  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-  const recognition = new SpeechRecognition();
+    // Configure the recognition instance
+    recognition.lang = 'en-US'; // Language
+    recognition.interimResults = false; // Only final results
+    recognition.continuous = false; // Stops after a single recognition
 
-  // Configure the recognition instance
-  recognition.lang = 'en-US'; // Language
-  recognition.interimResults = false; // Only final results
-  recognition.continuous = false; // Stops after a single recognition
+    // Start listening when the button is clicked
+    listenBtn.addEventListener('click', () => {
+      recognition.start();
+      listenBtn.textContent = 'Listening...'; // Update button text
+    });
 
- // Handle the recognition results
-  recognition.onresult = (event) => {
-    const transcript = event.results[0][0].transcript; // Get the recognized text
-    outputField.value = transcript; // Display in the textarea
-    listenButton.textContent = 'Listen'; // Reset button text
-  };
+    // Handle the recognition results
+    recognition.onresult = (event) => {
+      const transcript = event.results[0][0].transcript; // Get the recognized text
+      output.value += `${transcript}\n`; // Append the transcript to the textarea
+      listenBtn.textContent = 'Listen'; // Reset button text
+    };
 
-  // Handle errors
-  recognition.onerror = (event) => {
-    console.error('Speech Recognition Error:', event.error);
-    alert(`Error: ${event.error}`);
-    listenButton.textContent = 'Listen'; // Reset button text
-  };
+    // Handle errors
+    recognition.onerror = (event) => {
+      console.error('Speech Recognition Error:', event.error);
+      alert(`Error: ${event.error}`);
+      listenBtn.textContent = 'Listen'; // Reset button text
+    };
 
-  // Reset the button text when recognition ends
-  recognition.onend = () => {
-    listenButton.textContent = 'Listen';
-  };
-} else {
-  alert('Sorry, your browser does not support Speech Recognition.');
-}
+    // Reset the button text when recognition ends
+    recognition.onend = () => {
+      listenBtn.textContent = 'Listen';
+    };
+  } else {
+    alert('Sorry, your browser does not support Speech Recognition.');
+  }
 
   // Simulate Speak Functionality
   speakBtn.addEventListener('click', () => {
     const text = output.value;
-    alert(`Speaking: ${text}`);
+    if ('speechSynthesis' in window) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      speechSynthesis.speak(utterance);
+    } else {
+      alert('Sorry, your browser does not support Text-to-Speech.');
+    }
   });
 
   // Save Transcription
@@ -57,11 +64,12 @@ if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
   });
 
   // Feedback Submission
-  const feedbackForm = document.getElementById('feedbackForm');
-  feedbackForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    alert("Thank you for your feedback!");
-    feedbackForm.reset();
-  });
+  if (feedbackForm) {
+    feedbackForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      alert('Thank you for your feedback!');
+      feedbackForm.reset();
+    });
+  }
 });
 
