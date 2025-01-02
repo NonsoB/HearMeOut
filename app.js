@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
+  // Transcription-related variables
   const listenBtn = document.getElementById('listenBtn');
   const speakBtn = document.getElementById('speakBtn');
   const saveBtn = document.getElementById('saveBtn');
@@ -71,9 +72,8 @@ document.addEventListener('DOMContentLoaded', () => {
       feedbackForm.reset();
     });
   }
-});
 
-document.addEventListener('DOMContentLoaded', () => {
+  // Hamburger Menu Toggle
   const menuIcon = document.getElementById('menu-icon');
   const sideMenu = document.getElementById('side-menu');
 
