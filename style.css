@@ -20,16 +20,6 @@ nav ul {
   padding: 0;
 }
 
-nav ul li {
-  margin: 0 15px;
-}
-
-nav ul li a {
-  color: white;
-  text-decoration: none;
-  font-weight: bold;
-}
-
 main {
   padding: 20px;
 }
@@ -96,14 +86,6 @@ button:hover {
   background-color: #444;
 }
 
-.side-menu.hidden {
-  display: none;
-}
-
-.side-menu:not(.hidden) {
-  left: 0; /* Show the menu when not hidden */
-}
-
-.hidden {
-  left: -250px; /* Slide menu off-screen */
+.side-menu.visible {
+  left: 0;
 }
