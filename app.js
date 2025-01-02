@@ -78,13 +78,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const sideMenu = document.getElementById('side-menu');
 
   // Toggle side menu visibility
-  menuIcon.addEventListener('click', () => {
-    sideMenu.classList.toggle('hidden'); // Toggle the hidden class
-    if (sideMenu.classList.contains('hidden')) {
-      sideMenu.style.left = '-250px'; // Slide menu off-screen
-    } else {
-      sideMenu.style.left = '0'; // Slide menu in
-    }
-  });
+menuIcon.addEventListener('click', () => {
+  sideMenu.classList.toggle('hidden'); // Toggle the hidden class
 });
-

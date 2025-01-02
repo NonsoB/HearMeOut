@@ -99,3 +99,6 @@ button:hover {
   display: none;
 }
 
+.hidden {
+  left: -250px; /* Slide menu off-screen */
+}
