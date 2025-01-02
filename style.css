@@ -20,6 +20,16 @@ nav ul {
   padding: 0;
 }
 
+nav ul li {
+  margin: 0 15px;
+}
+
+nav ul li a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
 main {
   padding: 20px;
 }
@@ -88,4 +98,8 @@ button:hover {
 
 .side-menu.visible {
   left: 0;
+}
+
+.hidden {
+  left: -250px; /* Slide menu off-screen */
 }
