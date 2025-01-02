@@ -78,6 +78,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const sideMenu = document.getElementById('side-menu');
 
   // Toggle side menu visibility
-menuIcon.addEventListener('click', () => {
-  sideMenu.classList.toggle('hidden'); // Toggle the hidden class
+  menuIcon.addEventListener('click', () => {
+  sideMenu.classList.toggle('visible'); // Toggle the menu's visibility
 });
