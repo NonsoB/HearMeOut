@@ -84,7 +84,6 @@ button:hover {
 
 .hidden {
   left: -250px; /* Ensure it's fully hidden */
-  transition: left 0.3s ease;
 }
 
 .side-menu.hidden {
