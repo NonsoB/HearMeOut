@@ -1,44 +1,41 @@
 document.addEventListener('DOMContentLoaded', () => {
-  // Transcription-related variables
   const listenBtn = document.getElementById('listenBtn');
   const speakBtn = document.getElementById('speakBtn');
   const saveBtn = document.getElementById('saveBtn');
   const output = document.getElementById('output');
   const feedbackForm = document.getElementById('feedbackForm');
 
-  let currentVoice = null; // Variable to store the selected voice
+  let utterance = new SpeechSynthesisUtterance();
+
+  let language = 'en-US';
+  let voice = 'male';
 
   // Check if the browser supports the Web Speech API
   if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
     const recognition = new SpeechRecognition();
 
-    // Default language is set to English
-    recognition.lang = 'en-US'; // Language
-    recognition.interimResults = false; // Only final results
-    recognition.continuous = false; // Stops after a single recognition
+    recognition.lang = language;
+    recognition.interimResults = false;
+    recognition.continuous = false;
 
-    // Start listening when the button is clicked
     listenBtn.addEventListener('click', () => {
       recognition.start();
-      listenBtn.textContent = 'Listening...'; // Update button text
+      listenBtn.textContent = 'Listening...';
     });
 
-    // Handle the recognition results
     recognition.onresult = (event) => {
-      const transcript = event.results[0][0].transcript; // Get the recognized text
-      output.value += `${transcript}\n`; // Append the transcript to the textarea
-      listenBtn.textContent = 'Listen'; // Reset button text
+      const transcript = event.results[0][0].transcript;
+      output.value += `${transcript}\n`;
+      listenBtn.textContent = 'Listen';
     };
 
-    // Handle errors
     recognition.onerror = (event) => {
       console.error('Speech Recognition Error:', event.error);
       alert(`Error: ${event.error}`);
-      listenBtn.textContent = 'Listen'; // Reset button text
+      listenBtn.textContent = 'Listen';
     };
 
-    // Reset the button text when recognition ends
     recognition.onend = () => {
       listenBtn.textContent = 'Listen';
     };
@@ -46,38 +43,27 @@ document.addEventListener('DOMContentLoaded', () => {
     alert('Sorry, your browser does not support Speech Recognition.');
   }
 
- // Language Change Event
-    const languageSelect = document.getElementById('language');
-    languageSelect.addEventListener('change', (e) => {
-      recognition.lang = e.target.value; // Update the recognition language
-    });
-
-    // Voice Change Event
-    const voiceRadios = document.querySelectorAll('input[name="voice"]');
-    voiceRadios.forEach(radio => {
-      radio.addEventListener('change', (e) => {
-        const voiceName = e.target.value;
-        const voices = speechSynthesis.getVoices();
-        currentVoice = voices.find(voice => voice.name.toLowerCase() === voiceName.toLowerCase());
-      });
-    });
-  } else {
-    alert('Sorry, your browser does not support Speech Recognition.');
-  }
-
-
-  // Simulate Speak Functionality
   speakBtn.addEventListener('click', () => {
     const text = output.value;
-    if ('speechSynthesis' in window) {
-      const utterance = new SpeechSynthesisUtterance(text);
-      speechSynthesis.speak(utterance);
-    } else {
-      alert('Sorry, your browser does not support Text-to-Speech.');
-    }
+    utterance.text = text;
+    utterance.lang = language;
+    utterance.voice = voice === 'male' ? voices[0] : voices[1];
+    speechSynthesis.speak(utterance);
   });
 
-  // Save Transcription
+  const languageSelect = document.getElementById('language');
+  languageSelect.addEventListener('change', (event) => {
+    language = event.target.value;
+    utterance.lang = language;
+  });
+
+  const voiceRadios = document.querySelectorAll('input[name="voice"]');
+  voiceRadios.forEach(radio => {
+    radio.addEventListener('change', (event) => {
+      voice = event.target.value;
+    });
+  });
+
   saveBtn.addEventListener('click', () => {
     const blob = new Blob([output.value], { type: 'text/plain' });
     const a = document.createElement('a');
@@ -86,7 +72,6 @@ document.addEventListener('DOMContentLoaded', () => {
     a.click();
   });
 
-  // Feedback Submission
   if (feedbackForm) {
     feedbackForm.addEventListener('submit', (e) => {
       e.preventDefault();
@@ -97,10 +82,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Hamburger Menu Toggle
   const menuIcon = document.getElementById('menu-icon');
-  const menuItems = document.getElementById('menu-items');
+  const dropdownMenu = document.getElementById('dropdown-menu');
 
-  // Toggle side menu visibility
+  // Toggle dropdown menu visibility
   menuIcon.addEventListener('click', () => {
-  menuItems.classList.toggle('visible');
+    dropdownMenu.classList.toggle('visible');
+  });
 });
-});
+

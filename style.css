@@ -42,38 +42,39 @@ button:hover {
 
 /* Hamburger menu styling */
 .hamburger-menu {
-  position: relative;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  position: absolute;  /* Changed to absolute positioning for better alignment */
+  right: 20px;         /* Align it to the right of the page */
+  top: 20px;           /* Adjust for vertical positioning */
+  z-index: 1001;       /* Ensure it stays on top */
 }
 
-/* Hide the menu by default */
-#menu-items {
-  display: none;
+#menu-icon {
+  cursor: pointer;
+  font-size: 30px;
+  color: #fff;         /* Make the hamburger icon white */
+}
+
+/* Menu items styling */
+#dropdown-menu {
+  display: none;       /* Hide the menu by default */
   position: absolute;
+  right: 0;
   top: 50px;
-  right: 10px;
   background-color: #fff;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  padding: 10px;
+  padding: 20px;
+  border-radius: 5px;
+  width: 200px;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
   z-index: 1000;
 }
 
 /* Show the menu when the 'visible' class is added */
-#menu-items.visible {
+#dropdown-menu.visible {
   display: block;
 }
 
-/* Basic styling for the hamburger icon */
-#menu-icon {
-  cursor: pointer;
-  font-size: 30px;
-}
-
 /* Styling for the links in the menu */
-#menu-items a {
+#dropdown-menu a {
   display: block;
   padding: 10px;
   text-decoration: none;
@@ -82,23 +83,23 @@ button:hover {
 }
 
 /* Change link color on hover */
-#menu-items a:hover {
+#dropdown-menu a:hover {
   background-color: #f0f0f0;
 }
 
 /* Style for the Settings dropdown */
 .settings-dropdown {
-  display: none;
-  margin-top: 10px;
-  padding-left: 10px;
+  margin-top: 20px;
 }
 
-/* Show the dropdown when the settings link is clicked */
-.settings:hover .settings-dropdown {
-  display: block;
+.dropdown-content {
+  background-color: #444;
+  padding: 10px;
+  border-radius: 5px;
 }
 
-.settings-dropdown label {
+.dropdown-content label {
+  color: white;
   display: block;
   margin-bottom: 5px;
 }
