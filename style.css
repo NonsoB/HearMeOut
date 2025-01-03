@@ -4,12 +4,15 @@ body {
   margin: 0;
   padding: 0;
   background-color: #f9f9f9;
+  border: 5px;
+  border color; skyblue;
 }
 
 header {
   background-color: #6200ea;
   color: white;
-  padding: 10px 0;
+  padding: 20px 0;
+  height: 25px;
 }
 
 main {
