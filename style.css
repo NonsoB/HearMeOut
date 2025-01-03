@@ -12,26 +12,8 @@ header {
   padding: 10px 0;
 }
 
-nav ul {
-  display: flex;
-  list-style: none;
-  justify-content: center;
-  margin: 0;
-  padding: 0;
-}
-
-nav ul li {
-  margin: 0 15px;
-}
-
-nav ul li a {
-  color: white;
-  text-decoration: none;
-  font-weight: bold;
-}
-
 main {
-  padding: 20px;
+  padding: 50px;
 }
 
 #transcription {
@@ -77,12 +59,11 @@ button:hover {
   left: -250px; /* Default hidden position */
   width: 250px;
   height: 100%;
-  background-color: blue;
+  background-color: grey;
   transition: left 0.3s ease;
   padding: 10px;
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
   z-index: 1000;
-  display: none;
 }
 
 .side-menu a {
