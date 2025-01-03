@@ -6,12 +6,14 @@ document.addEventListener('DOMContentLoaded', () => {
   const output = document.getElementById('output');
   const feedbackForm = document.getElementById('feedbackForm');
 
+  let currentVoice = null; // Variable to store the selected voice
+
   // Check if the browser supports the Web Speech API
   if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
     const recognition = new SpeechRecognition();
 
-    // Configure the recognition instance
+    // Default language is set to English
     recognition.lang = 'en-US'; // Language
     recognition.interimResults = false; // Only final results
     recognition.continuous = false; // Stops after a single recognition
@@ -43,6 +45,26 @@ document.addEventListener('DOMContentLoaded', () => {
   } else {
     alert('Sorry, your browser does not support Speech Recognition.');
   }
+
+ // Language Change Event
+    const languageSelect = document.getElementById('language');
+    languageSelect.addEventListener('change', (e) => {
+      recognition.lang = e.target.value; // Update the recognition language
+    });
+
+    // Voice Change Event
+    const voiceRadios = document.querySelectorAll('input[name="voice"]');
+    voiceRadios.forEach(radio => {
+      radio.addEventListener('change', (e) => {
+        const voiceName = e.target.value;
+        const voices = speechSynthesis.getVoices();
+        currentVoice = voices.find(voice => voice.name.toLowerCase() === voiceName.toLowerCase());
+      });
+    });
+  } else {
+    alert('Sorry, your browser does not support Speech Recognition.');
+  }
+
 
   // Simulate Speak Functionality
   speakBtn.addEventListener('click', () => {
