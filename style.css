@@ -48,44 +48,58 @@ button:hover {
   align-items: center;
 }
 
-#menu-icon {
-  font-size: 30px;
-  cursor: pointer;
-}
-
-.side-menu {
-  position: fixed;
-  top: 0;
-  left: -250px; /* Default hidden position */
-  width: 250px;
-  height: 100%;
-  background-color: grey;
-  transition: left 0.3s ease;
+/* Hide the menu by default */
+#menu-items {
+  display: none;
+  position: absolute;
+  top: 50px;
+  right: 10px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
   padding: 10px;
-  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
   z-index: 1000;
 }
 
-.side-menu a {
+/* Show the menu when the 'visible' class is added */
+#menu-items.visible {
   display: block;
-  color: white;
-  padding: 10px 15px;
+}
+
+/* Basic styling for the hamburger icon */
+#menu-icon {
+  cursor: pointer;
+  font-size: 30px;
+}
+
+/* Styling for the links in the menu */
+#menu-items a {
+  display: block;
+  padding: 10px;
   text-decoration: none;
-  margin: 10px 0;
+  color: #000;
+  font-weight: bold;
 }
 
-.side-menu a:hover {
-  background-color: #444;
+/* Change link color on hover */
+#menu-items a:hover {
+  background-color: #f0f0f0;
 }
 
-.side-menu.visible {
-  left: 0;
+/* Style for the Settings dropdown */
+.settings-dropdown {
+  display: none;
+  margin-top: 10px;
+  padding-left: 10px;
 }
 
-.hidden {
-  left: -250px; /* Ensure it's fully hidden */
+/* Show the dropdown when the settings link is clicked */
+.settings:hover .settings-dropdown {
+  display: block;
 }
 
-.side-menu.hidden {
-  left: -250px; /* Slides off-screen */
+.settings-dropdown label {
+  display: block;
+  margin-bottom: 5px;
 }
+
