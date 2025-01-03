@@ -74,14 +74,14 @@ button:hover {
 .side-menu {
   position: fixed;
   top: 0;
-  left: -250px; /* Initially in view */
+  left: -250px; /* Default hidden position */
   width: 250px;
   height: 100%;
   background-color: blue;
   transition: left 0.3s ease;
   padding: 10px;
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
-  z-index: 1000; /* Make sure the sidebar appears on top */
+  z-index: 1000;
 }
 
 .side-menu a {
@@ -100,3 +100,11 @@ button:hover {
   left: 0;
 }
 
+.hidden {
+  left: -250px; /* Ensure it's fully hidden */
+  transition: left 0.3s ease;
+}
+
+.side-menu.hidden {
+  left: -250px; /* Slides off-screen */
+}

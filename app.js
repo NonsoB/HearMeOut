@@ -79,5 +79,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Toggle side menu visibility
   menuIcon.addEventListener('click', () => {
-  sideMenu.classList.toggle('visible'); // Toggle the menu's visibility
+  if (sideMenu.classList.contains('hidden')) {
+    sideMenu.classList.remove('hidden');
+    sideMenu.classList.add('visible');
+  } else {
+    sideMenu.classList.remove('visible');
+    sideMenu.classList.add('hidden');
+  }
 });
+
