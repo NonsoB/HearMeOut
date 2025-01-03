@@ -6,9 +6,23 @@ document.addEventListener('DOMContentLoaded', () => {
   const feedbackForm = document.getElementById('feedbackForm');
 
   let utterance = new SpeechSynthesisUtterance();
-
   let language = 'en-US';
   let voice = 'male';
+  let voices = [];
+
+  // Fetch voices from the speech synthesis API
+  const loadVoices = () => {
+    voices = speechSynthesis.getVoices();
+    // Set default voice as male (or the first available voice)
+    utterance.voice = voices.find(v => v.name.toLowerCase().includes('male')) || voices[0];
+  };
+
+  // Ensure voices are loaded
+  if (speechSynthesis.onvoiceschanged !== undefined) {
+    speechSynthesis.onvoiceschanged = loadVoices;
+  } else {
+    loadVoices();
+  }
 
   // Check if the browser supports the Web Speech API
   if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
@@ -47,7 +61,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const text = output.value;
     utterance.text = text;
     utterance.lang = language;
-    utterance.voice = voice === 'male' ? voices[0] : voices[1];
     speechSynthesis.speak(utterance);
   });
 
@@ -61,6 +74,8 @@ document.addEventListener('DOMContentLoaded', () => {
   voiceRadios.forEach(radio => {
     radio.addEventListener('change', (event) => {
       voice = event.target.value;
+      // Set the voice based on selection
+      utterance.voice = voice === 'male' ? voices.find(v => v.name.toLowerCase().includes('male')) : voices.find(v => v.name.toLowerCase().includes('female'));
     });
   });
 
