@@ -75,16 +75,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Hamburger Menu Toggle
   const menuIcon = document.getElementById('menu-icon');
-  const sideMenu = document.getElementById('side-menu');
+  const menuItems = document.getElementById('menu-items');
 
   // Toggle side menu visibility
   menuIcon.addEventListener('click', () => {
-    if (sideMenu.classList.contains('hidden')) {
-      sideMenu.classList.remove('hidden');
-      sideMenu.classList.add('visible');
-    } else {
-      sideMenu.classList.remove('visible');
-      sideMenu.classList.add('hidden');
-    }
-  });
+  menuItems.classList.toggle('visible');
+});
 });
