@@ -32,24 +32,28 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     recognition.onresult = (event) => {
-      const transcript = event.results[0][0].transcript;
-      output.value += `${transcript}\n`;
-      listenBtn.textContent = 'Listen';
+  const transcript = event.results[0][0].transcript;
+  highlightWord(transcript); // Highlight the last word
+  listenBtn.textContent = 'Listen'; // Reset the button
+};
+
 
      // Highlight the last word
   highlightWord(transcript.split(' ').length - 1);
     };
 
-   function highlightWord(wordIndex) {
-  const words = output.textContent.split(' ');
+   function highlightWord(transcript) {
+  const words = transcript.split(' '); // Split the latest transcript into words
   const highlightedText = words.map((word, index) => {
-    if (index === wordIndex) {
+    if (index === words.length - 1) {
       return `<span class="highlight">${word}</span>`;
     }
     return word;
   }).join(' ');
 
-  output.innerHTML = highlightedText;
+  // Append the highlighted text to the output without erasing previous content
+  const existingText = output.innerHTML; // Preserve existing HTML
+  output.innerHTML = `${existingText} ${highlightedText}`;
 }
 
 
