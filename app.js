@@ -38,10 +38,28 @@ document.addEventListener('DOMContentLoaded', () => {
       listenBtn.textContent = 'Listening...';
     });
 
+
+  // Add this function to highlight the word being transcribed
+  function highlightWord(wordIndex) {
+  const words = output.value.split(' ');  // Split the transcription into words
+  const highlightedText = words.map((word, index) => {
+    if (index === wordIndex) {
+      return `<span class="highlight">${word}</span>`;  // Highlight the word
+    }
+    return word;
+  }).join(' ');
+
+  output.innerHTML = highlightedText;  // Update the textarea with highlighted text
+}
+
+
     recognition.onresult = (event) => {
       const transcript = event.results[0][0].transcript;
       output.value += `${transcript}\n`;
       listenBtn.textContent = 'Listen';
+
+ // Highlight the last word
+  highlightWord(transcript.split(' ').length - 1); 
     };
 
     recognition.onerror = (event) => {

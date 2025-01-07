@@ -109,3 +109,9 @@ button:hover {
   margin-bottom: 5px;
 }
 
+/* Highlighted word style */
+.highlight {
+  background-color: yellow;
+  font-weight: bold;
+}
+
