@@ -35,7 +35,40 @@ document.addEventListener('DOMContentLoaded', () => {
       const transcript = event.results[0][0].transcript;
       output.value += `${transcript}\n`;
       listenBtn.textContent = 'Listen';
+
+     // Highlight the last word
+  highlightWord(transcript.split(' ').length - 1);
     };
+
+   function highlightWord(wordIndex) {
+  const words = output.textContent.split(' ');
+  const highlightedText = words.map((word, index) => {
+    if (index === wordIndex) {
+      return `<span class="highlight">${word}</span>`;
+    }
+    return word;
+  }).join(' ');
+
+  output.innerHTML = highlightedText;
+}
+
+
+if (output.textContent.trim() === '') {
+  output.textContent = 'Your transcription will appear here...';
+}
+
+output.addEventListener('focus', () => {
+  if (output.textContent === 'Your transcription will appear here...') {
+    output.textContent = '';
+  }
+});
+
+output.addEventListener('blur', () => {
+  if (output.textContent.trim() === '') {
+    output.textContent = 'Your transcription will appear here...';
+  }
+});
+
 
     recognition.onerror = (error) => {
       console.error(error);
