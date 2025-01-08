@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const speakBtn = document.getElementById('speakBtn');
   const saveBtn = document.getElementById('saveBtn');
   const output = document.getElementById('output');
-	output.setAttribute('contenteditable', 'true');
+  output.setAttribute('contenteditable', 'true');
   const menuIcon = document.getElementById('menu-icon');
   const dropdownMenu = document.getElementById('dropdown-menu');
 
@@ -33,47 +33,29 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     recognition.onresult = (event) => {
-  const transcript = event.results[0][0].transcript;
-  highlightWord(transcript); // Highlight the last word
-  listenBtn.textContent = 'Listen'; // Reset the button
-};
-
-
-     // Highlight the last word
-  highlightWord(transcript.split(' ').length - 1);
+      const transcript = event.results[0][0].transcript;
+      highlightWord(transcript); // Highlight the transcript
+      listenBtn.textContent = 'Listen'; // Reset the button
     };
 
-   function highlightWord(transcript) {
-  const words = transcript.split(' '); // Split the latest transcript into words
-  const highlightedText = words.map((word, index) => {
-    if (index === words.length - 1) {
-      return `<span class="highlight">${word}</span>`;
+    // Highlight Words in Transcription
+    function highlightWord(transcript) {
+      if (output.textContent === 'Your transcription will appear here...') {
+        output.textContent = ''; // Clear placeholder
+      }
+
+      const words = transcript.split(' '); // Split the latest transcript into words
+      const highlightedText = words.map((word, index) => {
+        if (index === words.length - 1) {
+          return `<span class="highlight">${word}</span>`;
+        }
+        return word;
+      }).join(' ');
+
+      // Append the highlighted text to the output without erasing previous content
+      const existingText = output.innerHTML; // Preserve existing HTML
+      output.innerHTML = `${existingText} ${highlightedText}`;
     }
-    return word;
-  }).join(' ');
-
-  // Append the highlighted text to the output without erasing previous content
-  const existingText = output.innerHTML; // Preserve existing HTML
-  output.innerHTML = `${existingText} ${highlightedText}`;
-}
-
-
-if (output.textContent.trim() === '') {
-  output.textContent = 'Your transcription will appear here...';
-}
-
-output.addEventListener('focus', () => {
-  if (output.textContent === 'Your transcription will appear here...') {
-    output.textContent = '';
-  }
-});
-
-output.addEventListener('blur', () => {
-  if (output.textContent.trim() === '') {
-    output.textContent = 'Your transcription will appear here...';
-  }
-});
-
 
     recognition.onerror = (error) => {
       console.error(error);
@@ -87,18 +69,39 @@ output.addEventListener('blur', () => {
     alert('Speech Recognition is not supported in your browser.');
   }
 
+  // Speak Button
   speakBtn.addEventListener('click', () => {
-    utterance.text = output.value;
+    const text = output.textContent.trim();
+    if (text === '' || text === 'Your transcription will appear here...') {
+      alert('Please provide text to speak!');
+      return;
+    }
+
+    utterance.text = text;
     utterance.lang = language;
     speechSynthesis.speak(utterance);
   });
 
+  // Save Button
   saveBtn.addEventListener('click', () => {
-    const blob = new Blob([output.value], { type: 'text/plain' });
+    const blob = new Blob([output.textContent.trim()], { type: 'text/plain' });
     const a = document.createElement('a');
     a.href = URL.createObjectURL(blob);
     a.download = 'transcription.txt';
     a.click();
+  });
+
+  // Placeholder Logic
+  output.addEventListener('focus', () => {
+    if (output.textContent === 'Your transcription will appear here...') {
+      output.textContent = '';
+    }
+  });
+
+  output.addEventListener('blur', () => {
+    if (output.textContent.trim() === '') {
+      output.textContent = 'Your transcription will appear here...';
+    }
   });
 
   // Toggle dropdown menu
