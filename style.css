@@ -17,6 +17,7 @@ main {
   padding: 30px;
   text-align: left;
 }
+
 #transcription {
   margin: 20px auto;
   text-align: center;
@@ -29,7 +30,7 @@ textarea {
   font-size: 16px;
   border: 1px solid #ccc;
   padding: 10px;
-  border-radius: 4px;
+  border-radius: 12px; /* Rounded corners */
 }
 
 button {
@@ -38,7 +39,7 @@ button {
   background-color: #864014;
   color: white;
   border: none;
-  border-radius: 4px;
+  border-radius: 12px; /* Rounded corners */
   cursor: pointer;
 }
 
@@ -90,13 +91,14 @@ button:hover {
 
 #output {
   border: 10px solid #864014;
-  padding: 10px 10px;
+  padding: 20px; /* Equal padding on both sides */
   min-height: 150px;
   width: 90%;
   font-size: 16px;
   background-color: white;
   white-space: pre-wrap;
   overflow-y: auto;
+  border-radius: 12px; /* Rounded corners */
 }
 
 /* Dark Theme */
@@ -130,7 +132,7 @@ body.dark-theme .highlight {
 
 /* Styling for the app name */
 .app-name {
-  font-size: 3rem; /* Adjust size for bold, catchy look */
+  font-size: 3.5rem; /* Adjust size for bold, catchy look */
   font-weight: 900; /* Make it extra bold */
   color: #864014; /* Choose a bold and rich color */
   margin: 0; /* Remove default spacing */
@@ -140,10 +142,19 @@ body.dark-theme .highlight {
 
 /* Styling for the tagline */
 .tagline {
-  font-size: 1.2rem; /* Adjust size for balance */
+  font-size: 1.5rem; /* Adjust size for balance */
   font-weight: 600; /* Slightly less bold than the app name */
   color: #5b2b0e; /* A complementary color to the app name */
   margin-top: 5px; /* Minimal spacing between the app name and tagline */
   text-align: center;
+}
+
+/* Reduce spacing between h1 and h4 */
+h1 {
+  margin-bottom: 5px; /* Reduce space below h1 */
+}
+
+h4 {
+  margin-top: 0; /* Remove default spacing above h4 */
 }
 
