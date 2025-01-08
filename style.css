@@ -11,13 +11,13 @@ header {
   background-color: #864014;
   color: white;
   padding: 10px 20px;
-  height: 30px;
+  height: 40px;
 }
 
 /* Styling for the app name in the header */
 header .app-name {
-  font-size: 1rem; /* Adjust the size */
-  font-weight: 600; /* Bold */
+  font-size: 2rem; /* Adjust the size */
+  font-weight: 900; /* Bold */
   color: white;
   text-align: left; 
 }
