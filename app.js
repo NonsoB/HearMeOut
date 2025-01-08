@@ -33,6 +33,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
+  // Close the dropdown menu after toggling the theme
+  dropdownMenu.classList.remove('visible');
+});
+
   // Load voices
   let voices = [];
   const loadVoices = () => {
