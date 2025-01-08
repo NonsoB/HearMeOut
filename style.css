@@ -112,3 +112,33 @@ button:hover {
 #themeToggle:hover {
   background-color: #555;
 }
+
+/* Dark Theme */
+body.dark-theme {
+  background-color: #333;
+  color: white;
+}
+
+body.dark-theme header {
+  background-color: #444;
+}
+
+body.dark-theme #output {
+  background-color: #444;
+  color: white;
+  border-color: #666;
+}
+
+body.dark-theme button {
+  background-color: #555;
+  color: white;
+}
+
+body.dark-theme button:hover {
+  background-color: #777;
+}
+
+body.dark-theme .highlight {
+  background-color: #bbb;
+}
+
