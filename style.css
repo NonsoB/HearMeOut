@@ -128,3 +128,22 @@ body.dark-theme .highlight {
   background-color: #bbb;
 }
 
+/* Styling for the app name */
+.app-name {
+  font-size: 3rem; /* Adjust size for bold, catchy look */
+  font-weight: 900; /* Make it extra bold */
+  color: #864014; /* Choose a bold and rich color */
+  margin: 0; /* Remove default spacing */
+  letter-spacing: -1px; /* Slightly reduce spacing between letters */
+  text-align: center;
+}
+
+/* Styling for the tagline */
+.tagline {
+  font-size: 1.2rem; /* Adjust size for balance */
+  font-weight: 600; /* Slightly less bold than the app name */
+  color: #5b2b0e; /* A complementary color to the app name */
+  margin-top: 5px; /* Minimal spacing between the app name and tagline */
+  text-align: center;
+}
+
