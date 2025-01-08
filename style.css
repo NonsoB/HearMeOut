@@ -100,7 +100,7 @@ button:hover {
   white-space: pre-wrap;
   overflow-y: auto;
   border-radius: 12px; /* Rounded corners */
-  margin-top: 100px;
+  margin-top: 50px;
 }
 
 /* Dark Theme */
@@ -141,3 +141,6 @@ h4 {
   margin-top: 0; /* Remove default spacing above h4 */
 }
 
+#speakBtn, #listenBtn {
+  margin-top: 80px; 
+}
