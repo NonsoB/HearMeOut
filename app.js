@@ -6,9 +6,32 @@ document.addEventListener('DOMContentLoaded', () => {
   output.setAttribute('contenteditable', 'true');
   const menuIcon = document.getElementById('menu-icon');
   const dropdownMenu = document.getElementById('dropdown-menu');
+  const themeToggleBtn = document.getElementById('themeToggle'); // Button to toggle dark theme
 
   let utterance = new SpeechSynthesisUtterance();
   let language = 'en-US';
+
+   // Check localStorage for saved theme preference
+  if (localStorage.getItem('theme') === 'dark') {
+    document.body.classList.add('dark-theme');
+  }
+
+  // Toggle dropdown menu visibility
+  menuIcon.addEventListener('click', () => {
+    dropdownMenu.classList.toggle('visible');
+  });
+
+  // Toggle Dark Theme
+  themeToggleBtn.addEventListener('click', () => {
+    document.body.classList.toggle('dark-theme');
+    
+    // Save theme preference to localStorage
+    if (document.body.classList.contains('dark-theme')) {
+      localStorage.setItem('theme', 'dark');
+    } else {
+      localStorage.setItem('theme', 'light');
+    }
+  });
 
   // Load voices
   let voices = [];
