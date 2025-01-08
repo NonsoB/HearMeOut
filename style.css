@@ -137,9 +137,9 @@ h1 {
 }
 
 h4 {
-  margin-top: 0; /* Remove default spacing above h4 */
+  margin-top: 3px; /* Remove default spacing above h4 */
 }
 
 #speakBtn, #listenBtn {
-  margin-top: 80px; 
+  margin-top: 40px; 
 }
