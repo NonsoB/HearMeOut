@@ -89,14 +89,15 @@ document.addEventListener('DOMContentLoaded', () => {
   // Speak Button
   speakBtn.addEventListener('click', () => {
     const text = output.textContent.trim();
-    if (text === '' || text === 'Your transcription will appear here...') {
-      alert('Please provide text to speak!');
-      return;
+    
+    // Clear placeholder text before speaking
+    if (text === 'Your transcription will appear here...') {
+      output.textContent = ''; // Clear placeholder
     }
 
-    // Remove placeholder text when Speak button is clicked
-    if (output.textContent === 'Your transcription will appear here...') {
-      output.textContent = ''; // Clear placeholder
+    if (text === '') {
+      alert('Please provide text to speak!');
+      return;
     }
 
     const words = text.split(' '); // Split the text into words
