@@ -14,6 +14,9 @@ document.addEventListener('DOMContentLoaded', () => {
   // Check localStorage for saved theme preference
   if (localStorage.getItem('theme') === 'dark') {
     document.body.classList.add('dark-theme');
+    themeToggleBtn.textContent = 'Light Mode'; // Change button text to 'Light Mode' when in dark mode
+  } else {
+    themeToggleBtn.textContent = 'Dark Mode'; // Default to 'Dark Mode'
   }
 
   // Toggle dropdown menu visibility when clicking the menu icon
@@ -24,12 +27,14 @@ document.addEventListener('DOMContentLoaded', () => {
   // Toggle Dark Theme
   themeToggleBtn.addEventListener('click', () => {
     document.body.classList.toggle('dark-theme');
-    
+
     // Save theme preference to localStorage
     if (document.body.classList.contains('dark-theme')) {
       localStorage.setItem('theme', 'dark');
+      themeToggleBtn.textContent = 'Light Mode'; // Change to 'Light Mode' when dark mode is active
     } else {
       localStorage.setItem('theme', 'light');
+      themeToggleBtn.textContent = 'Dark Mode'; // Change to 'Dark Mode' when light mode is active
     }
   });
 
