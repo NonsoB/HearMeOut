@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const speakBtn = document.getElementById('speakBtn');
   const saveBtn = document.getElementById('saveBtn');
   const output = document.getElementById('output');
+	output.setAttribute('contenteditable', 'true');
   const menuIcon = document.getElementById('menu-icon');
   const dropdownMenu = document.getElementById('dropdown-menu');
 
