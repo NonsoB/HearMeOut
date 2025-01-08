@@ -100,6 +100,7 @@ button:hover {
   white-space: pre-wrap;
   overflow-y: auto;
   border-radius: 12px; /* Rounded corners */
+  margin-top: 50px;
 }
 
 /* Dark Theme */
@@ -129,25 +130,6 @@ body.dark-theme button:hover {
 
 body.dark-theme .highlight {
   background-color: #bbb;
-}
-
-/* Styling for the app name */
-.app-name {
-  font-size: 3.5rem; /* Adjust size for bold, catchy look */
-  font-weight: 900; /* Make it extra bold */
-  color: #864014; /* Choose a bold and rich color */
-  margin: 0; /* Remove default spacing */
-  letter-spacing: -1px; /* Slightly reduce spacing between letters */
-  text-align: center;
-}
-
-/* Styling for the tagline */
-.tagline {
-  font-size: 1.5rem; /* Adjust size for balance */
-  font-weight: 600; /* Slightly less bold than the app name */
-  color: #5b2b0e; /* A complementary color to the app name */
-  margin-top: 5px; /* Minimal spacing between the app name and tagline */
-  text-align: center;
 }
 
 /* Reduce spacing between h1 and h4 */
