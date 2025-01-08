@@ -100,20 +100,6 @@ button:hover {
 }
 
 /* Dark Theme */
-#themeToggle {
-  background-color: #444;
-  color: white;
-  border: none;
-  padding: 10px;
-  cursor: pointer;
-  width: 100%;
-}
-
-#themeToggle:hover {
-  background-color: #555;
-}
-
-/* Dark Theme */
 body.dark-theme {
   background-color: #333;
   color: white;
