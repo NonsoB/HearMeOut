@@ -15,7 +15,7 @@ header {
 
 main {
   padding: 30px;
-  text-align: center;
+  text-align: right;
 }
 
 #transcription {
@@ -95,7 +95,7 @@ button:hover {
   min-height: 150px;
   width: 90%;
   font-size: 16px;
-  background-color: #f6dbc9;
+  background-color: #f0be9f;
   white-space: pre-wrap;
   overflow-y: auto;
 }
