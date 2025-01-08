@@ -26,6 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
     const recognition = new SpeechRecognition();
     recognition.lang = language;
+    recognition.interimResults = true; // Enable real-time transcription updates
 
     listenBtn.addEventListener('click', () => {
       recognition.start();
@@ -33,29 +34,22 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     recognition.onresult = (event) => {
-      const transcript = event.results[0][0].transcript;
-      highlightWord(transcript); // Highlight the transcript
-      listenBtn.textContent = 'Listen'; // Reset the button
-    };
+      let interimTranscript = '';
+      let finalTranscript = '';
 
-    // Highlight Words in Transcription
-    function highlightWord(transcript) {
-      if (output.textContent === 'Your transcription will appear here...') {
-        output.textContent = ''; // Clear placeholder
+      for (let i = 0; i < event.results.length; i++) {
+        const transcriptPart = event.results[i][0].transcript;
+        if (event.results[i].isFinal) {
+          finalTranscript += transcriptPart + ' ';
+        } else {
+          interimTranscript = transcriptPart; // Capture the interim part
+        }
       }
 
-      const words = transcript.split(' '); // Split the latest transcript into words
-      const highlightedText = words.map((word, index) => {
-        if (index === words.length - 1) {
-          return `<span class="highlight">${word}</span>`;
-        }
-        return word;
-      }).join(' ');
-
-      // Append the highlighted text to the output without erasing previous content
-      const existingText = output.innerHTML; // Preserve existing HTML
-      output.innerHTML = `${existingText} ${highlightedText}`;
-    }
+      // Combine final transcript and highlight the interim word in real-time
+      const highlightedInterim = `<span class="highlight">${interimTranscript}</span>`;
+      output.innerHTML = `${finalTranscript}${highlightedInterim}`;
+    };
 
     recognition.onerror = (error) => {
       console.error(error);
@@ -93,6 +87,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Placeholder Logic
   output.addEventListener('focus', () => {
+    if (output.textContent === 'Your transcription will appear here...') {
+      output.textContent = '';
+    }
+  });
+
+  output.addEventListener('input', () => {
     if (output.textContent === 'Your transcription will appear here...') {
       output.textContent = '';
     }
