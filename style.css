@@ -3,7 +3,7 @@ body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  color: #864014;
+  color: #5b2b0e;
   background-color: white;
 }
 
@@ -100,7 +100,7 @@ button:hover {
   white-space: pre-wrap;
   overflow-y: auto;
   border-radius: 12px; /* Rounded corners */
-  margin-top: 50px;
+  margin-top: 100px;
 }
 
 /* Dark Theme */
