@@ -11,17 +11,21 @@ header {
   background-color: #864014;
   color: white;
   padding: 10px 20px;
-  height: 30px;
+  height: 60px; /* Increased height to accommodate app name */
+  display: flex;
+  align-items: center; /* Center vertically */
 }
 
-/* Styling for the app name in the header */
 header .app-name {
+  font-family: 'Pacifico', sans-serif;
   font-size: 2rem; /* Adjust the size */
-  font-weight: 900px; /* Bold */
+  font-weight: 900; /* Bold */
   color: white;
   text-align: left;
+  margin: 0; /* Ensure no extra margin */
 }
 
+/* Main content styles */
 main {
   padding: 30px;
   text-align: center;
@@ -141,8 +145,13 @@ body.dark-theme .highlight {
 
 h4 {
   margin-top: 3px; /* Remove default spacing above h4 */
+  font-family: 'Lobster', sans-serif; /* Apply Lobster font */
+  font-size: 1.5rem;
+  text-align: center; /* Optional: center the text */
+  font-weight: 400;
 }
 
 #speakBtn, #listenBtn {
   margin-top: 40px; 
 }
+
