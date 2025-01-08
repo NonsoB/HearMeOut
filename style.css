@@ -16,12 +16,10 @@ header {
 
 /* Styling for the app name in the header */
 header .app-name {
-  font-size: 2rem; /* Adjust the size */
-  font-weight: 900; /* Bold */
+  font-size: 1rem; /* Adjust the size */
+  font-weight: 600; /* Bold */
   color: white;
   text-align: left; 
-  margin: 0; /* Remove any default margin */
-
 }
 
 main {
