@@ -11,12 +11,12 @@ document.addEventListener('DOMContentLoaded', () => {
   let utterance = new SpeechSynthesisUtterance();
   let language = 'en-US';
 
-   // Check localStorage for saved theme preference
+  // Check localStorage for saved theme preference
   if (localStorage.getItem('theme') === 'dark') {
     document.body.classList.add('dark-theme');
   }
 
-  // Toggle dropdown menu visibility
+  // Toggle dropdown menu visibility when clicking the menu icon
   menuIcon.addEventListener('click', () => {
     dropdownMenu.classList.toggle('visible');
   });
@@ -32,10 +32,6 @@ document.addEventListener('DOMContentLoaded', () => {
       localStorage.setItem('theme', 'light');
     }
   });
-
-  // Close the dropdown menu after toggling the theme
-  dropdownMenu.classList.remove('visible');
-});
 
   // Load voices
   let voices = [];
@@ -98,6 +94,11 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
+    // Remove placeholder text when Speak button is clicked
+    if (output.textContent === 'Your transcription will appear here...') {
+      output.textContent = ''; // Clear placeholder
+    }
+
     const words = text.split(' '); // Split the text into words
     let currentWordIndex = 0;
 
@@ -157,11 +158,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (output.textContent.trim() === '') {
       output.textContent = 'Your transcription will appear here...';
     }
-  });
-
-  // Toggle dropdown menu
-  menuIcon.addEventListener('click', () => {
-    dropdownMenu.classList.toggle('visible');
   });
 });
 
