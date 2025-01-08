@@ -17,7 +17,7 @@ header {
 /* Styling for the app name in the header */
 header .app-name {
   font-size: 2rem; /* Adjust the size */
-  font-weight: 900; /* Bold */
+  font-weight: 900px; /* Bold */
   color: white;
   text-align: left;
 }
