@@ -71,8 +71,36 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
-    utterance.text = text;
+    const words = text.split(' '); // Split the text into words
+    let currentWordIndex = 0;
+
+    utterance = new SpeechSynthesisUtterance();
     utterance.lang = language;
+    utterance.rate = 1; // Adjust speaking rate if needed
+
+    // Highlight the current word being spoken
+    utterance.onboundary = (event) => {
+      if (event.name === 'word') {
+        // Highlight the current word
+        const highlightedText = words.map((word, index) => {
+          if (index === currentWordIndex) {
+            return `<span class="highlight">${word}</span>`;
+          }
+          return word;
+        }).join(' ');
+
+        output.innerHTML = highlightedText; // Update the output with the highlighted word
+        currentWordIndex++;
+      }
+    };
+
+    // Reset after speaking finishes
+    utterance.onend = () => {
+      currentWordIndex = 0; // Reset index
+      output.innerHTML = text; // Restore original text
+    };
+
+    utterance.text = text;
     speechSynthesis.speak(utterance);
   });
 
