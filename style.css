@@ -89,12 +89,12 @@ button:hover {
 }
 
 #output {
-  border: 1px solid #ccc;
-  padding: 40px 10px;
+  border: 10px solid #864014;
+  padding: 10px 10px;
   min-height: 150px;
   width: 90%;
   font-size: 16px;
-  background-color: #f0be9f;
+  background-color: white;
   white-space: pre-wrap;
   overflow-y: auto;
 }
