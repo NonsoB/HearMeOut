@@ -167,3 +167,32 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
+
+const translateButton = document.createElement("button");
+translateButton.textContent = "Translate";
+document.body.appendChild(translateButton);
+
+translateButton.addEventListener("click", async () => {
+  const text = document.getElementById("output").textContent;
+  const targetLanguage = "es"; // Spanish, for example, change as per your needs
+
+  const response = await fetch(`https://translation.googleapis.com/language/translate/v2?key=AIzaSyBnDLg-PXY4sgsINkouOZJoL-N5OAaDtFo`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      q: text,
+      target: targetLanguage,
+    }),
+  });
+
+  const data = await response.json();
+  if (data && data.data && data.data.translations) {
+    const translatedText = data.data.translations[0].translatedText;
+    document.getElementById("output").textContent = translatedText;
+  } else {
+    console.error("Translation failed:", data);
+  }
+});
+
