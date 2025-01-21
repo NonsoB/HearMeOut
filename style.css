@@ -156,9 +156,9 @@ h4 {
 }
 
 .app-icon {
-  width: 24px;  /* Adjust the width */
-  height: 24px; /* Adjust the height */
-  margin-right: 10px; /* Space between icon and app name */
+  width: 30px;  /* Adjust the width */
+  height: 30px; /* Adjust the height */
+  margin-right: 5px; /* Space between icon and app name */
   vertical-align: middle; /* Align vertically with the app name */
 }
 
