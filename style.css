@@ -155,3 +155,17 @@ h4 {
   margin-top: 40px; 
 }
 
+.app-icon {
+  width: 24px;  /* Adjust the width */
+  height: 24px; /* Adjust the height */
+  margin-right: 10px; /* Space between icon and app name */
+  vertical-align: middle; /* Align vertically with the app name */
+}
+
+@media (max-width: 600px) {
+  .app-icon {
+    width: 20px;  /* Smaller size for mobile */
+    height: 20px;
+  }
+}
+
