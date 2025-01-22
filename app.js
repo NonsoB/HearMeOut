@@ -167,11 +167,6 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-
-const translateButton = document.createElement("button");
-translateButton.textContent = "Translate";
-document.body.appendChild(translateButton);
-
 translateButton.addEventListener("click", async () => {
   const text = document.getElementById("output").textContent;
   const targetLanguage = "es"; // Spanish, for example, change as per your needs
