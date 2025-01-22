@@ -33,6 +33,7 @@ footer {
 main {
   padding: 30px;
   text-align: center;
+  place-items: center;
 }
 
 #transcription {
@@ -46,7 +47,7 @@ textarea {
   margin-top: 10px;
   font-size: 16px;
   border: 1px solid #ccc;
-  padding: 10px 10px;
+  padding: 10px;
   border-radius: 12px; /* Rounded corners */
   
 }
