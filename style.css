@@ -179,3 +179,42 @@ h4 {
   margin-left: 5px;
 }
 
+#language-dropdown {
+  padding: 10px 20px;
+  margin: 10px;
+  background-color: #864014;
+  color: white;
+  border: none;
+  border-radius: 12px; /* Rounded corners */
+  cursor: pointer;
+  font-size: 16px;
+  font-family: Arial, sans-serif; /* Match button font */
+  appearance: none; /* Removes default dropdown styling */
+  -webkit-appearance: none; /* Safari fix */
+  -moz-appearance: none; /* Firefox fix */
+  text-align: center; /* Centers text */
+}
+
+/* Add hover effect similar to the button */
+#language-dropdown:hover {
+  background-color: #5b2b0e;
+}
+
+/* Add a down arrow to mimic default dropdowns */
+#language-dropdown::after {
+  content: '▼';
+  display: inline-block;
+  margin-left: 10px;
+  font-size: 12px;
+  color: white;
+  pointer-events: none; /* Ensures arrow doesn't interfere with clicks */
+}
+
+/* Adjust dropdown styling for smaller screens */
+@media (max-width: 600px) {
+  #language-dropdown {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+}
+
