@@ -25,6 +25,10 @@ header .app-name {
   margin: 0; /* Ensure no extra margin */
 }
 
+footer {
+	text-align: center;
+}
+
 /* Main content styles */
 main {
   padding: 30px;
