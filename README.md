@@ -21,6 +21,7 @@
 - **Deployment:** Vercel for hosting the app
 - **Feedback System:** Zonka for collecting feedback
 - **Font:** Pacifico (for the app name)
+- **Api:** Google Cloud Console (For the voice and language translation) 
 
 ## Getting Started
 
@@ -53,6 +54,10 @@ Here’s a breakdown of the project’s directory structure:
 
 ```
 HearMeOut/
+├──Assets
+|   |
+|  favicon.png          #Image/icon is stored here
+|
 ├── index.html          # Main HTML file that structures the app
 ├── style.css           # CSS file for app styling
 ├── app.js              # JavaScript file for app functionality
