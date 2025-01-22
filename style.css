@@ -169,3 +169,13 @@ h4 {
   }
 }
 
+.translation-controls {
+  display: inline-block;
+  margin-left: 10px; /* Adjust spacing between buttons */
+  vertical-align: middle;
+}
+
+#language-dropdown {
+  margin-left: 5px;
+}
+
