@@ -33,7 +33,6 @@ footer {
 main {
   padding: 30px;
   text-align: center;
-  place-items: center;
 }
 
 #transcription {
@@ -49,12 +48,13 @@ textarea {
   border: 1px solid #ccc;
   padding: 10px;
   border-radius: 12px; /* Rounded corners */
+  place-items: center;
   
 }
 
 button {
   padding: 10px 20px;
-  margin: 10px;
+  margin: 10px 10px;
   background-color: #864014;
   color: white;
   border: none;
