@@ -74,9 +74,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       }
 
-      // Combine final transcript and highlight the interim word in real-time
-      const highlightedInterim = `<span class="highlight">${interimTranscript}</span>`;
-      output.innerHTML = `${finalTranscript}${highlightedInterim}`;
+      // Detect language from predefined list
+      const detectedLanguage = detectLanguage(finalTranscript);
+
+      // Update output box and detected language
+      output.innerHTML = finalTranscript;
+      console.log(`Detected Language: ${detectedLanguage}`);
     };
 
     recognition.onerror = (error) => {
@@ -111,56 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
     utterance = new SpeechSynthesisUtterance();
     utterance.rate = 1; // Adjust speaking rate if needed
 
-    try {
-      // Detect the language of the text using a language detection API
-      const response = await fetch(
-        `https://translation.googleapis.com/language/translate/v2/detect?key=AIzaSyBnDLg-PXY4sgsINkouOZJoL-N5OAaDtFo`,
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            q: text,
-          }),
-        }
-      );
-
-      const data = await response.json();
-      if (data && data.data && data.data.detections) {
-        const detectedLanguage = data.data.detections[0][0].language;
-        utterance.lang = detectedLanguage; // Set the detected language
-      } else {
-        console.warn('Could not detect language; defaulting to English.');
-        utterance.lang = 'en-US'; // Default to English if detection fails
-      }
-    } catch (error) {
-      console.error('Error detecting language:', error);
-      utterance.lang = 'en-US'; // Default to English on error
-    }
-
-    // Highlight the current word being spoken
-    utterance.onboundary = (event) => {
-      if (event.name === 'word') {
-        // Highlight the current word
-        const highlightedText = words.map((word, index) => {
-          if (index === currentWordIndex) {
-            return `<span class="highlight">${word}</span>`;
-          }
-          return word;
-        }).join(' ');
-
-        output.innerHTML = highlightedText; // Update the output with the highlighted word
-        currentWordIndex++;
-      }
-    };
-
-    // Reset after speaking finishes
-    utterance.onend = () => {
-      currentWordIndex = 0; // Reset index
-      output.innerHTML = text; // Restore original text
-    };
-
+    utterance.lang = 'en-US'; // Default to English
     utterance.text = text;
     speechSynthesis.speak(utterance);
   });
@@ -234,5 +188,28 @@ document.addEventListener('DOMContentLoaded', () => {
       alert('An error occurred while translating. Please check your connection and try again.');
     }
   });
+
+  /**
+   * Detect language based on predefined list
+   * @param {string} text - Spoken text to analyze
+   * @returns {string} - Detected language or 'English' if no match
+   */
+  function detectLanguage(text) {
+    const languageList = {
+      'Bonjour': 'French',
+      'Hola': 'Spanish',
+      'Hallo': 'German',
+      'Ciao': 'Italian',
+      'Hello': 'English',
+    };
+
+    for (const [keyPhrase, language] of Object.entries(languageList)) {
+      if (text.includes(keyPhrase)) {
+        return language; // Return detected language
+      }
+    }
+
+    return 'English'; // Default to English if no match
+  }
 });
 
