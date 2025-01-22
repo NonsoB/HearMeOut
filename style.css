@@ -200,16 +200,6 @@ h4 {
   background-color: #5b2b0e;
 }
 
-/* Add a down arrow to mimic default dropdowns */
-#language-dropdown::after {
-  content: '▼';
-  display: inline-block;
-  margin-left: 10px;
-  font-size: 12px;
-  color: white;
-  pointer-events: none; /* Ensures arrow doesn't interfere with clicks */
-}
-
 /* Adjust dropdown styling for smaller screens */
 @media (max-width: 600px) {
   #language-dropdown {
