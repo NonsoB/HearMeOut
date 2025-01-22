@@ -165,29 +165,47 @@ document.addEventListener('DOMContentLoaded', () => {
       output.textContent = 'Your transcription will appear here...';
     }
   });
-});
 
-translateButton.addEventListener("click", async () => {
-  const text = document.getElementById("output").textContent;
-  const targetLanguage = "es"; // Spanish, for example, change as per your needs
+  // Translate Button Logic
+  const translateBtn = document.getElementById('translate-btn');
+  const languageDropdown = document.getElementById('language-dropdown');
 
-  const response = await fetch(`https://translation.googleapis.com/language/translate/v2?key=AIzaSyBnDLg-PXY4sgsINkouOZJoL-N5OAaDtFo`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      q: text,
-      target: targetLanguage,
-    }),
+  translateBtn.addEventListener('click', async () => {
+    const text = output.textContent.trim();
+    const targetLanguage = languageDropdown.value; // Get the selected language
+
+    if (!text || text === 'Your transcription will appear here...') {
+      alert('Please provide text to translate!');
+      return;
+    }
+
+    try {
+      const response = await fetch(
+        `https://translation.googleapis.com/language/translate/v2?key=AIzaSyBnDLg-PXY4sgsINkouOZJoL-N5OAaDtFo`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            q: text,
+            target: targetLanguage,
+          }),
+        }
+      );
+
+      const data = await response.json();
+      if (data && data.data && data.data.translations) {
+        const translatedText = data.data.translations[0].translatedText;
+        output.textContent = translatedText;
+      } else {
+        console.error('Translation failed:', data);
+        alert('Translation failed. Please try again.');
+      }
+    } catch (error) {
+      console.error('Error during translation:', error);
+      alert('An error occurred while translating. Please check your connection and try again.');
+    }
   });
-
-  const data = await response.json();
-  if (data && data.data && data.data.translations) {
-    const translatedText = data.data.translations[0].translatedText;
-    document.getElementById("output").textContent = translatedText;
-  } else {
-    console.error("Translation failed:", data);
-  }
 });
 
