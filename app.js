@@ -209,3 +209,76 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
+speakBtn.addEventListener('click', async () => {
+  const text = output.textContent.trim();
+
+  // Clear placeholder text before speaking
+  if (text === 'Your transcription will appear here...') {
+    output.textContent = ''; // Clear placeholder
+  }
+
+  if (text === '') {
+    alert('Please provide text to speak!');
+    return;
+  }
+
+  const words = text.split(' '); // Split the text into words
+  let currentWordIndex = 0;
+
+  utterance = new SpeechSynthesisUtterance();
+  utterance.rate = 1; // Adjust speaking rate if needed
+
+  try {
+    // Detect the language of the text using a language detection API
+    const response = await fetch(
+      `https://translation.googleapis.com/language/translate/v2/detect?key=AIzaSyBnDLg-PXY4sgsINkouOZJoL-N5OAaDtFo`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          q: text,
+        }),
+      }
+    );
+
+    const data = await response.json();
+    if (data && data.data && data.data.detections) {
+      const detectedLanguage = data.data.detections[0][0].language;
+      utterance.lang = detectedLanguage; // Set the detected language
+    } else {
+      console.warn('Could not detect language; defaulting to English.');
+      utterance.lang = 'en-US'; // Default to English if detection fails
+    }
+  } catch (error) {
+    console.error('Error detecting language:', error);
+    utterance.lang = 'en-US'; // Default to English on error
+  }
+
+  // Highlight the current word being spoken
+  utterance.onboundary = (event) => {
+    if (event.name === 'word') {
+      // Highlight the current word
+      const highlightedText = words.map((word, index) => {
+        if (index === currentWordIndex) {
+          return `<span class="highlight">${word}</span>`;
+        }
+        return word;
+      }).join(' ');
+
+      output.innerHTML = highlightedText; // Update the output with the highlighted word
+      currentWordIndex++;
+    }
+  };
+
+  // Reset after speaking finishes
+  utterance.onend = () => {
+    currentWordIndex = 0; // Reset index
+    output.innerHTML = text; // Restore original text
+  };
+
+  utterance.text = text;
+  speechSynthesis.speak(utterance);
+});
+
